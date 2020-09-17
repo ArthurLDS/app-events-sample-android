@@ -1,6 +1,15 @@
 <resources>
-    <string name="app_name">SicrediPostApp</string>
+    <string name="app_name">Sicredi Events</string>
 
-    <string name="activity_events_title">Sicredi Events</string>
-    <string name="activity_event_detail_title">Sicredi Event</string>
+    <string name="activity_events_title">Eventos</string>
+    <string name="activity_event_detail_title">Detalhes do Evento</string>
+    <string name="txt_check_in">Efetuar Check In</string>
+    <string name="txt_name">Nome</string>
+    <string name="txt_lastname">Sobrenome</string>
+    <string name="txt_confirm">Confirmar</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_check_in_success">CheckIn efetuado com Sucesso!!</string>
+    <string name="txt_check_in_error">Ocorreu um erro ao efetuar o CheckIn</string>
+    <string name="txt_fill_name">Por favor, preecha o nome</string>
+    <string name="txt_fill_email">Por favor, preencha o e-mail</string>
 </resources>

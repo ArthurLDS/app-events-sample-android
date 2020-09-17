@@ -1,6 +1,6 @@
 package com.sicredi.sicredipostapp.data.model
 
-data class Event(
+data class EventModel(
     val id: String,
     val title: String,
     val description: String,

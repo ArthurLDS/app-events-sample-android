@@ -1,8 +1,10 @@
 package com.sicredi.sicredipostapp.data.repository
 
-import com.sicredi.sicredipostapp.data.network.RetrofitService
-import com.sicredi.sicredipostapp.data.model.Event
+import com.sicredi.sicredipostapp.data.model.CheckInModel
+import com.sicredi.sicredipostapp.data.model.EventModel
 
-class EventRepository() {
-    suspend fun getEvents(): List<Event> = RetrofitService.service.getEvents()
+interface EventRepository {
+    suspend fun getEvents(): List<EventModel>
+    suspend fun getEvent(id: String): EventModel
+    suspend fun postCheckIn(checkIn: CheckInModel)
 }
