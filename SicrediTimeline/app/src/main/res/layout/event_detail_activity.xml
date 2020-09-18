@@ -28,7 +28,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="28dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_post_image"
@@ -83,14 +83,14 @@
             style="@style/Widget.MaterialComponents.BottomSheet.Modal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:behavior_peekHeight="54dp"
+            app:behavior_peekHeight="72dp"
             app:cardBackgroundColor="#eee"
             app:cardCornerRadius="18dp"
             app:cardElevation="12dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <include
-                layout="@layout/check_in_bottom_sheet_fragment"
+                layout="@layout/check_in_bottom_sheet_view"
                 android:layout_width="match_parent"
                 android:layout_height="400dp" />
 

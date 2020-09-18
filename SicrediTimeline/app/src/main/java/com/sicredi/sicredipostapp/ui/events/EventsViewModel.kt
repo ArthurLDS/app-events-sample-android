@@ -2,7 +2,6 @@ package com.sicredi.sicredipostapp.ui.events
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.sicredi.sicredipostapp.data.model.EventModel
 import com.sicredi.sicredipostapp.data.repository.EventRepository
@@ -29,14 +28,4 @@ class EventsViewModel(private val repository: EventRepository) : ViewModel() {
             }
         }
     }
-
-    class EventsViewModelFactory(
-        private val repository: EventRepository
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return EventsViewModel(repository) as T
-        }
-
-    }
-
 }

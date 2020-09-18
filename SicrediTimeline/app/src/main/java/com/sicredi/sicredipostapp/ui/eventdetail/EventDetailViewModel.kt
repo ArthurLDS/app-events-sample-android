@@ -2,13 +2,11 @@ package com.sicredi.sicredipostapp.ui.eventdetail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.sicredi.sicredipostapp.data.model.CheckInModel
 import com.sicredi.sicredipostapp.data.model.EventModel
 import com.sicredi.sicredipostapp.data.repository.EventRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class EventDetailViewModel(private val repository: EventRepository) : ViewModel() {
 
@@ -39,14 +37,6 @@ class EventDetailViewModel(private val repository: EventRepository) : ViewModel(
                 checkInResultLiveData.value = false
                 print("API Error: ${ex.message}")
             }
-        }
-    }
-
-    class EventDetailViewModelFactory(
-        private val repository: EventRepository
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return EventDetailViewModel(repository) as T
         }
     }
 }

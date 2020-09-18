@@ -1,24 +1,27 @@
 package com.sicredi.sicredipostapp.ui.eventdetail
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Window
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sicredi.sicredipostapp.R
-import com.sicredi.sicredipostapp.data.repository.EventRepositoryImpl
 import com.sicredi.sicredipostapp.ui.extension.loadImage
-import kotlinx.android.synthetic.main.check_in_bottom_sheet_fragment.*
+import kotlinx.android.synthetic.main.check_in_bottom_sheet_view.*
 import kotlinx.android.synthetic.main.event_detail_activity.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class EventDetailActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: EventDetailViewModel
+    private val viewModel: EventDetailViewModel by viewModel()
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<CardView>
 
     companion object {
         const val EVENT_ID = "idEvent"
@@ -36,13 +39,38 @@ class EventDetailActivity : AppCompatActivity() {
         setContentView(R.layout.event_detail_activity)
 
         setUpToolbar()
-        setUpViewModel()
         setUpBottomSheet()
-
         setUpEventDetails()
         setUpCheckInResult()
 
         btn_confirm_checkin.setOnClickListener { onClickConfirmCheckIn() }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_event_detail, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_share -> {
+            openShareChooser()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openShareChooser() {
+        //TODO: Ajust message share
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     private fun setUpEventDetails() {
@@ -90,19 +118,22 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomSheet() {
-        val bottomSheetBehavior = BottomSheetBehavior.from(bs_check_in)
+        bottomSheetBehavior = BottomSheetBehavior.from(bs_check_in)
         bottomSheetBehavior.isHideable = false
+        view_slide_up.setOnClickListener { handleCollapseBottomSheet() }
+        tv_check_in.setOnClickListener { handleCollapseBottomSheet() }
     }
 
     private fun hideBottomSheet() {
-        val bottomSheetBehavior = BottomSheetBehavior.from(bs_check_in)
         bottomSheetBehavior.isHideable = true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-    private fun setUpViewModel() {
-        viewModel = EventDetailViewModel.EventDetailViewModelFactory(EventRepositoryImpl())
-            .create(EventDetailViewModel::class.java)
+    private fun handleCollapseBottomSheet() {
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        else
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun setUpToolbar() {
