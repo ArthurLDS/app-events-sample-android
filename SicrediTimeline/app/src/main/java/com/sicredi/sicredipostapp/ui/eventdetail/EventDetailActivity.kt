@@ -11,9 +11,13 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sicredi.sicredipostapp.R
+import com.sicredi.sicredipostapp.ui.extension.gone
 import com.sicredi.sicredipostapp.ui.extension.loadImage
-import kotlinx.android.synthetic.main.check_in_bottom_sheet_view.*
+import com.sicredi.sicredipostapp.ui.extension.visible
+import kotlinx.android.synthetic.main.view_check_in_bottom_sheet.*
 import kotlinx.android.synthetic.main.event_detail_activity.*
+import kotlinx.android.synthetic.main.event_detail_activity.toolbar_event_detail
+import kotlinx.android.synthetic.main.event_detail_activity.view_loading
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,6 +43,7 @@ class EventDetailActivity : AppCompatActivity() {
         setContentView(R.layout.event_detail_activity)
 
         setUpToolbar()
+        setUpLoading()
         setUpBottomSheet()
         setUpEventDetails()
         setUpCheckInResult()
@@ -59,6 +64,12 @@ class EventDetailActivity : AppCompatActivity() {
         else -> {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setUpLoading() {
+        viewModel.loadingDetailsLiveData.observe(this, Observer { isLoading ->
+            if (isLoading) view_loading.visible() else view_loading.gone()
+        })
     }
 
     private fun openShareChooser() {

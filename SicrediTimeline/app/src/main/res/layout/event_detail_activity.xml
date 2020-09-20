@@ -17,6 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/view_loading"
+        android:visibility="gone"
+        layout="@layout/view_loading"/>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -28,14 +33,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingBottom="28dp">
+            android:paddingBottom="32dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_post_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:adjustViewBounds="false"
-                android:background="#fbfbfb"
+                android:background="@color/color_gray_light"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +95,7 @@
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <include
-                layout="@layout/check_in_bottom_sheet_view"
+                layout="@layout/view_check_in_bottom_sheet"
                 android:layout_width="match_parent"
                 android:layout_height="400dp" />
 

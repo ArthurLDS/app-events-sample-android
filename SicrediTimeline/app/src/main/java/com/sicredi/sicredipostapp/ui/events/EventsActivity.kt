@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sicredi.sicredipostapp.R
 import com.sicredi.sicredipostapp.ui.eventdetail.EventDetailActivity
+import com.sicredi.sicredipostapp.ui.extension.gone
+import com.sicredi.sicredipostapp.ui.extension.visible
 import kotlinx.android.synthetic.main.events_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,6 +21,17 @@ class EventsActivity : AppCompatActivity() {
         setContentView(R.layout.events_activity)
         setUpToolbar()
 
+        setUpLoading()
+        setUpEventList()
+    }
+
+    private fun setUpLoading() {
+        viewModel.loadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading) view_loading.visible() else view_loading.gone()
+        })
+    }
+
+    private fun setUpEventList() {
         viewModel.eventsLiveData.observe(this, Observer {
             it?.let { posts ->
                 with(recyclerview_post_list) {
