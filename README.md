@@ -43,7 +43,7 @@ git clone https://github.com/ArthurLDS/events-android.git
 - O aplicativo usa **MVVM** como arquitetura, conforme recomendação do próprio Google.
 <img src="imgs/MVVM.png"  width="800" height="200">
 
-## Testes
+## Testes Unitarios
 
 - Para rodar os testes basta abrir o projeto no Android Studio.
 - Logo em seguida navegue até a pasta `com.secredi.sicredipostapp`
