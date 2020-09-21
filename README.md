@@ -54,6 +54,7 @@ git clone https://github.com/ArthurLDS/events-android.git
 
 As seguintes bibliotecas e frameworks foram usadas na construção do projeto:
 - [Koin](https://github.com/InsertKoinIO/koin)
+- [Kotlin Coroutines](https://developer.android.com/courses/pathways/android-coroutines)
 - [Glide](https://github.com/bumptech/glide)
 - [Retrofit](https://github.com/square/retrofit)
 - [Mockk](https://github.com/mockk/mockk)
