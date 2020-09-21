@@ -59,4 +59,4 @@ As seguintes bibliotecas e frameworks foram usadas na construção do projeto:
 - [AndroidX](https://developer.android.com/jetpack/androidx?authuser=1)
 
 ## Preview
-<img src="imgs/part1.gif"  width="270" height="480"> <img src="imgs/part2.gif"  width="270" height="480">
+<img src="imgs/part1.gif"  width="270" height="490"> <img src="imgs/part2.gif"  width="270" height="490">
