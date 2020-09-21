@@ -46,7 +46,8 @@
             android:id="@+id/txt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nextClusterForward="@id/til_email"
+            android:singleLine="true"
+            android:nextFocusForward="@id/txt_email"
             android:textColor="@color/color_gray_dark" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +75,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_confirm_checkin"
+        android:id="@+id/btn_confirm_check_in"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
@@ -84,5 +85,16 @@
         app:layout_constraintEnd_toEndOf="@id/til_email"
         app:layout_constraintStart_toStartOf="@id/til_email"
         app:layout_constraintTop_toBottomOf="@id/til_email" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_btn_check_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="@id/til_email"
+        app:layout_constraintStart_toStartOf="@id/til_email"
+        app:layout_constraintTop_toBottomOf="@id/til_email"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

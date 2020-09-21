@@ -10,6 +10,6 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
-fun View.invisible() {
-    this.visibility = View.INVISIBLE
+fun View.visibleOrGone(isVisible: Boolean) {
+    this.visibility = if(isVisible) View.VISIBLE else View.GONE
 }

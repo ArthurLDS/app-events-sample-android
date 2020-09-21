@@ -6,12 +6,14 @@
 
     <string name="txt_check_in">Efetuar Check-In</string>
     <string name="txt_name">Nome</string>
-    <string name="txt_lastname">Sobrenome</string>
-    <string name="txt_confirm">Confirmar</string>
     <string name="txt_email">Email</string>
+    <string name="txt_confirm">Confirmar</string>
     <string name="txt_check_in_success">CheckIn efetuado com Sucesso!!</string>
     <string name="txt_check_in_error">Ocorreu um erro ao efetuar o CheckIn</string>
     <string name="txt_fill_name">Por favor, preencha o nome</string>
     <string name="txt_fill_email">Por favor, preencha o e-mail</string>
     <string name="txt_share">Compartilhar</string>
+    <string name="txt_ops_error">Ooops!</string>
+    <string name="txt_something_wrong_error">Alguma coisa deu errado\nao carregar a lista.</string>
+    <string name="txt_try_again">Tentar Novamente</string>
 </resources>

@@ -8,18 +8,15 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sicredi.sicredipostapp.R
-import com.sicredi.sicredipostapp.ui.extension.gone
-import com.sicredi.sicredipostapp.ui.extension.loadImage
-import com.sicredi.sicredipostapp.ui.extension.visible
-import kotlinx.android.synthetic.main.view_check_in_bottom_sheet.*
+import com.sicredi.sicredipostapp.ui.extension.*
 import kotlinx.android.synthetic.main.event_detail_activity.*
-import kotlinx.android.synthetic.main.event_detail_activity.toolbar_event_detail
-import kotlinx.android.synthetic.main.event_detail_activity.view_loading
+import kotlinx.android.synthetic.main.view_check_in_bottom_sheet.*
+import kotlinx.android.synthetic.main.view_network_error.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -44,11 +41,12 @@ class EventDetailActivity : AppCompatActivity() {
 
         setUpToolbar()
         setUpLoading()
+        setUpTryAgainLoadEvent()
+        setUpErrorNetwork()
         setUpBottomSheet()
+        setUpInputChange()
         setUpEventDetails()
-        setUpCheckInResult()
-
-        btn_confirm_checkin.setOnClickListener { onClickConfirmCheckIn() }
+        setUpCheckIn()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -58,7 +56,7 @@ class EventDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_share -> {
-            openShareChooser()
+            onClickShareChooser()
             true
         }
         else -> {
@@ -68,15 +66,28 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun setUpLoading() {
         viewModel.loadingDetailsLiveData.observe(this, Observer { isLoading ->
-            if (isLoading) view_loading.visible() else view_loading.gone()
+            view_loading_detail.visibleOrGone(isLoading)
         })
     }
 
-    private fun openShareChooser() {
-        //TODO: Ajust message share
+    private fun setUpErrorNetwork() {
+        viewModel.errorEventDetailLiveData.observe(this, Observer { hasError ->
+            view_network_error_detail.visibleOrGone(hasError)
+        })
+    }
+
+    private fun setUpTryAgainLoadEvent() {
+        view_network_error_detail.btn_try_again.setOnClickListener {
+            viewModel.getEvent(getEventId())
+        }
+    }
+
+    private fun onClickShareChooser() {
+
+        val shareText = viewModel.getShareText()
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+            putExtra(Intent.EXTRA_TEXT, shareText)
             type = "text/plain"
         }
 
@@ -86,16 +97,29 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun setUpEventDetails() {
         viewModel.eventDetailLiveData.observe(this, Observer {
+            content_detail.visible()
             it?.let { event ->
                 iv_post_image.loadImage(event.image)
                 tv_title.text = event.title
                 tv_subtitle.text = event.description
+                tv_date.text = event.date.toDateFormatted()
+                tv_price.text = event.price.toMoneyFormat()
             }
+            bottom_sheet_check_in.visible()
         })
-        viewModel.getEvent(intent.getStringExtra(EVENT_ID))
+        viewModel.getEvent(getEventId())
     }
 
-    private fun setUpCheckInResult() {
+    private fun setUpCheckIn() {
+        viewModel.loadingCheckInLiveData.observe(this, Observer { isLoading ->
+            if (isLoading) {
+                btn_confirm_check_in.gone()
+                progress_bar_btn_check_in.visible()
+            } else {
+                btn_confirm_check_in.visible()
+                progress_bar_btn_check_in.gone()
+            }
+        })
         viewModel.checkInResultLiveData.observe(this, Observer {
             it?.let { success ->
                 hideBottomSheet()
@@ -111,21 +135,36 @@ class EventDetailActivity : AppCompatActivity() {
                 }
             }
         })
+        btn_confirm_check_in.setOnClickListener { onClickConfirmCheckIn() }
+    }
+
+    private fun setUpInputChange() {
+        txt_name.addTextChangedListener { validateUserName() }
+        txt_email.addTextChangedListener { validateUserEmail() }
     }
 
     private fun onClickConfirmCheckIn() {
-        val eventId = intent.getStringExtra(EVENT_ID)
+        val eventId = getEventId()
         val userName: String = txt_name.text.toString()
         val userEmail: String = txt_email.text.toString()
 
-        if (userName.isEmpty())
-            txt_name.error = getString(R.string.txt_fill_name)
+        validateUserName()
+        validateUserEmail()
 
-        if (userEmail.isEmpty())
-            txt_email.error = getString(R.string.txt_fill_email)
-
-        if (userName.isNotEmpty() && userEmail.isNotEmpty())
+        if (viewModel.validateText(userName) && viewModel.validateEmail(userEmail))
             viewModel.postCheckIn(eventId, userName, userEmail)
+    }
+
+    private fun validateUserName() {
+        val userName: String = txt_name.text.toString()
+        til_name.error =
+            if (viewModel.validateText(userName).not()) getString(R.string.txt_fill_name) else null
+    }
+
+    private fun validateUserEmail() {
+        val userEmail: String = txt_email.text.toString()
+        til_email.error = if (viewModel.validateEmail(userEmail).not())
+            getString(R.string.txt_fill_email) else null
     }
 
     private fun setUpBottomSheet() {
@@ -155,4 +194,6 @@ class EventDetailActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun getEventId() = intent.getStringExtra(EVENT_ID);
 }

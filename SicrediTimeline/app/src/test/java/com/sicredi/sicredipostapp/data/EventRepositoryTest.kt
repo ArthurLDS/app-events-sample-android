@@ -1,11 +1,13 @@
 package com.sicredi.sicredipostapp.data
 
 import com.sicredi.sicredipostapp.data.network.RetrofitService
-import com.sicredi.sicredipostapp.data.repository.EventRepository
 import com.sicredi.sicredipostapp.data.repository.EventRepositoryImpl
+import com.sicredi.sicredipostapp.testUtil.TestData.CHECK_IN
+import com.sicredi.sicredipostapp.testUtil.TestData.EVENT_DETAIL
 import com.sicredi.sicredipostapp.testUtil.TestData.EVENT_LIST
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -20,7 +22,7 @@ import org.junit.Test
 class EventRepositoryTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
-    private val apiService = RetrofitService()
+    private val apiService: RetrofitService = mockk()
 
     @Before
     fun setup() {
@@ -40,6 +42,24 @@ class EventRepositoryTest {
         EventRepositoryImpl(apiService).getEvents()
 
         coVerify { apiService.service.getEvents() }
+    }
+
+    @Test
+    fun `when getEvent should call getEvent from service`() = runBlockingTest {
+        coEvery { apiService.service.getEvent(EVENT_DETAIL.id) } returns EVENT_DETAIL
+
+        EventRepositoryImpl(apiService).getEvent(EVENT_DETAIL.id)
+
+        coVerify { apiService.service.getEvent(EVENT_DETAIL.id) }
+    }
+
+    @Test
+    fun `when postCheckIn should call postCheckIn from service`() = runBlockingTest {
+        coEvery { apiService.service.postCheckIn(CHECK_IN) } returns mockk()
+
+        EventRepositoryImpl(apiService).postCheckIn(CHECK_IN)
+
+        coVerify { apiService.service.postCheckIn(CHECK_IN) }
     }
 
 }

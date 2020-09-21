@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sicredi.sicredipostapp.R
 import com.sicredi.sicredipostapp.ui.eventdetail.EventDetailActivity
-import com.sicredi.sicredipostapp.ui.extension.gone
-import com.sicredi.sicredipostapp.ui.extension.visible
+import com.sicredi.sicredipostapp.ui.extension.visibleOrGone
 import kotlinx.android.synthetic.main.events_activity.*
+import kotlinx.android.synthetic.main.view_network_error.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EventsActivity : AppCompatActivity() {
@@ -21,14 +21,28 @@ class EventsActivity : AppCompatActivity() {
         setContentView(R.layout.events_activity)
         setUpToolbar()
 
+        setUpTryAgainLoadEvents()
         setUpLoading()
+        setUpErrorNetwork()
         setUpEventList()
     }
 
     private fun setUpLoading() {
         viewModel.loadingLiveData.observe(this, Observer { isLoading ->
-            if (isLoading) view_loading.visible() else view_loading.gone()
+            view_loading.visibleOrGone(isLoading)
         })
+    }
+
+    private fun setUpErrorNetwork() {
+        viewModel.errorEventDetailLiveData.observe(this, Observer { hasError ->
+            view_network_error_events.visibleOrGone(hasError)
+        })
+    }
+
+    private fun setUpTryAgainLoadEvents() {
+        view_network_error_events.btn_try_again.setOnClickListener {
+            viewModel.getEvents()
+        }
     }
 
     private fun setUpEventList() {
