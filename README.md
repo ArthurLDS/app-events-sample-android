@@ -36,6 +36,7 @@ git clone https://github.com/ArthurLDS/events-android.git
 - Também apresenta os detalhes de um evento específico, onde o usuário pode fazer o check in  e também compartilhar o evento com outras pessoas em outros aplicativos
 - Implementação de injeção de dependências usando `Koin`
 - Cobertura de testes unitários dos repositorios e das view models usando a biblioteca `Mockk`
+- O Código foi escrito buscando manter as melhores práticas de Clean Code
 
 ## Arquitetura
 
