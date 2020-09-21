@@ -9,7 +9,7 @@
 
 ## Descrição do Projeto
 
-- O Events Sicredi é um APP criado para demonstação de algumas bibliotecas e implementações do Android.
+- O Events Sicredi é um APP criado para demonstação de algumas bibliotecas e implementações do Android usando Kotlin.
 
 <p align="center">
  <a href="#começando">Começando</a> •
