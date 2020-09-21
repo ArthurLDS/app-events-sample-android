@@ -1,4 +1,4 @@
-# Events Sicredi
+# APP de Eventos Android
 
 [![Build](https://img.shields.io/static/v1?label=build&message=passing&color=green)]()
 [![Kotlin](https://img.shields.io/static/v1?label=kotlin&message=powered&color=00AFF0)]()
