@@ -47,7 +47,7 @@ git clone https://github.com/ArthurLDS/events-android.git
 - Para rodar os testes basta abrir o projeto no Android Studio.
 - Logo em seguida navegue até a pasta `com.secredi.sicredipostapp`
 - Clique com o botão direito sobre a pasta e depois em `Run 'Tests in 'sicredipostapp''`
-<img src="imgs/testes1.png"  width="500" height="500">
+<img src="imgs/testes1.png"  width="300" height="500">
 
 ## Tecnologias
 

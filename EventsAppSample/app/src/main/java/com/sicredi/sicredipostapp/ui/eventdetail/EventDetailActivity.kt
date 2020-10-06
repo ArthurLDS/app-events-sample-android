@@ -5,15 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sicredi.sicredipostapp.R
+import com.sicredi.sicredipostapp.ui.MessageIconDialog
 import com.sicredi.sicredipostapp.ui.extension.*
 import kotlinx.android.synthetic.main.event_detail_activity.*
+import kotlinx.android.synthetic.main.event_detail_activity.tv_subtitle
+import kotlinx.android.synthetic.main.event_detail_activity.tv_title
 import kotlinx.android.synthetic.main.view_check_in_bottom_sheet.*
 import kotlinx.android.synthetic.main.view_network_error.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -111,6 +113,7 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private fun setUpCheckIn() {
+
         viewModel.loadingCheckInLiveData.observe(this, Observer { isLoading ->
             if (isLoading) {
                 btn_confirm_check_in.gone()
@@ -120,19 +123,12 @@ class EventDetailActivity : AppCompatActivity() {
                 progress_bar_btn_check_in.gone()
             }
         })
+
         viewModel.checkInResultLiveData.observe(this, Observer {
             it?.let { success ->
                 hideBottomSheet()
-                if (success) {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.txt_check_in_success),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(this, getString(R.string.txt_check_in_error), Toast.LENGTH_LONG)
-                        .show()
-                }
+
+                if (success) showSuccessCheckInDialog() else showErrorCheckInDialog()
             }
         })
         btn_confirm_check_in.setOnClickListener { onClickConfirmCheckIn() }
@@ -193,6 +189,26 @@ class EventDetailActivity : AppCompatActivity() {
         toolbar_event_detail.setNavigationOnClickListener {
             finish()
         }
+    }
+
+    private fun showErrorCheckInDialog() {
+        MessageIconDialog
+            .newInstance(
+                getString(R.string.txt_ops_error),
+                getString(R.string.txt_check_in_error),
+                R.drawable.ic_done
+            )
+            .show(supportFragmentManager, MessageIconDialog.TAG)
+    }
+
+    private fun showSuccessCheckInDialog() {
+        MessageIconDialog
+            .newInstance(
+                getString(R.string.txt_all_right),
+                getString(R.string.txt_check_in_ok_description),
+                R.drawable.ic_done
+            )
+            .show(supportFragmentManager, MessageIconDialog.TAG)
     }
 
     private fun getEventId() = intent.getStringExtra(EVENT_ID);

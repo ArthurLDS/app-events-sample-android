@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">Sicredi Events</string>
 
+    <!-- activities -->
     <string name="activity_events_title">Eventos</string>
     <string name="activity_event_detail_title">Sobre o Evento</string>
 
+    <!-- texts -->
     <string name="txt_check_in">Efetuar Check-In</string>
     <string name="txt_name">Nome</string>
     <string name="txt_email">Email</string>
     <string name="txt_confirm">Confirmar</string>
     <string name="txt_check_in_success">Check-In efetuado com Sucesso!!</string>
-    <string name="txt_check_in_error">Ocorreu um erro ao efetuar o CheckIn</string>
+    <string name="txt_check_in_error">Erro ao efetuar o Check In\nTente novamente mais tarde</string>
     <string name="txt_fill_name">Por favor, preencha o nome</string>
     <string name="txt_fill_email">Por favor, preencha o e-mail</string>
     <string name="txt_share">Compartilhar</string>
     <string name="txt_ops_error">Ooops!</string>
     <string name="txt_something_wrong_error">Alguma coisa deu errado\nao carregar a lista.</string>
     <string name="txt_try_again">Tentar Novamente</string>
+    <string name="txt_all_right">Tudo certo!</string>
+    <string name="txt_check_in_ok_description">Seu check-in foi feito realizado com\nsucesso, agora é só aproveitar 😄</string>
+    <string name="txt_ok">OK</string>
+
 </resources>

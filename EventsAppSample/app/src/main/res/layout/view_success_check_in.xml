@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="30dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@drawable/ic_done" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="@string/txt_all_right" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_subtitle_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="14dp"
+        android:ellipsize="end"
+        android:textAlignment="center"
+        android:textColor="@color/color_gray_dark"
+        android:textSize="16sp"
+        tools:text="@string/txt_check_in_ok_description" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_confirm_message_ok_dialog"
+        android:layout_width="260dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_rounded_primary"
+        android:text="@string/txt_ok"
+        android:textSize="20sp"
+        app:layout_constraintCircleRadius="20dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

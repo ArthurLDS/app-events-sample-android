@@ -183,5 +183,4 @@ class EventDetailViewModelTest {
         return viewModel
     }
 
-
 }
