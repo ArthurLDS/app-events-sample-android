@@ -1,4 +1,4 @@
-# Events Sicredi
+# APP de Eventos Android
 
 [![Build](https://img.shields.io/static/v1?label=build&message=passing&color=green)]()
 [![Kotlin](https://img.shields.io/static/v1?label=kotlin&message=powered&color=00AFF0)]()
@@ -9,7 +9,7 @@
 
 ## Descrição do Projeto
 
-- O Events Sicredi é um APP criado para demonstação de algumas bibliotecas e implementações do Android.
+- O Events Sicredi é um APP criado para demonstação de algumas bibliotecas e implementações do Android usando Kotlin.
 
 <p align="center">
  <a href="#começando">Começando</a> •
@@ -36,28 +36,29 @@ git clone https://github.com/ArthurLDS/events-android.git
 - Também apresenta os detalhes de um evento específico, onde o usuário pode fazer o check in  e também compartilhar o evento com outras pessoas em outros aplicativos
 - Implementação de injeção de dependências usando `Koin`
 - Cobertura de testes unitários dos repositorios e das view models usando a biblioteca `Mockk`
+- O Código foi escrito buscando manter as melhores práticas de Clean Code
 
 ## Arquitetura
 
 - O aplicativo usa **MVVM** como arquitetura, conforme recomendação do próprio Google.
 <img src="imgs/MVVM.png"  width="800" height="200">
 
-## Testes
+## Testes Unitarios
 
 - Para rodar os testes basta abrir o projeto no Android Studio.
 - Logo em seguida navegue até a pasta `com.secredi.sicredipostapp`
 - Clique com o botão direito sobre a pasta e depois em `Run 'Tests in 'sicredipostapp''`
-<img src="imgs/testes1.png"  width="300" height="500">
+<img src="imgs/testes1.png"  width="300" height="300">
 
 ## Tecnologias
 
 As seguintes bibliotecas e frameworks foram usadas na construção do projeto:
 - [Koin](https://github.com/InsertKoinIO/koin)
+- [Kotlin Coroutines](https://developer.android.com/courses/pathways/android-coroutines)
 - [Glide](https://github.com/bumptech/glide)
 - [Retrofit](https://github.com/square/retrofit)
 - [Mockk](https://github.com/mockk/mockk)
 - [AndroidX](https://developer.android.com/jetpack/androidx?authuser=1)
 
 ## Preview
-<img src="imgs/part1.gif"  width="130" height="400">
-<img src="imgs/part2.gif"  width="130" height="400">
+<img src="imgs/part1.gif"  width="270" height="500"> <img src="imgs/part2.gif"  width="270" height="500">
